@@ -5,12 +5,7 @@ import sys
 import os
 
 def add_to_startup():
-    try:
-        import pythoncom  # part of pywin32
-        from win32com.client import Dispatch
-    except ImportError:
-        print("pywin32 is required to create startup shortcut. Run: pip install pywin32")
-        return
+
 
     startup_folder = os.path.join(os.environ['APPDATA'], r'Microsoft\Windows\Start Menu\Programs\Startup')
     shortcut_path = os.path.join(startup_folder, "CheeseReminder.lnk")
@@ -41,7 +36,7 @@ img_path = os.path.join(base_path, "cheese.png")
 
 def show_popup():
     root = tk.Tk()
-    root.title("Reminder")
+    root.title("Cheese")
     root.overrideredirect(True)
     root.attributes("-topmost", True)
     root.lift()
