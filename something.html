@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Something</title>
+</head>
+<style>
+    body {
+        text-align: center;
+        margin-top: 50px;
+    }
+    #display {
+        width: 230px;       /* a bit wider than button row */
+        height: 60px;       /* taller to match button height */
+        font-size: 28px;    /* bigger text for readability */
+        text-align: right;  /* numbers align right */
+        margin-bottom: 15px;
+        padding: 5px 10px;  /* add some horizontal padding */
+        border-radius: 5px; /* subtle rounding to match button style */
+        border: 2px solid #ccc; 
+    }
+    button {
+        width: 50px;
+        height: 50px;
+        font-size: 20px;
+        margin: 5px;
+        color: white;
+        background-color: #4CAF50;
+        border: none;
+        border-radius: 5px; 
+    }
+</style>
+<body>
+    <h2>Calculator</h2>
+    <br>
+    <input type="text" id="display" readonly>
+    <br>
+    <button id="button7">7</button>
+    <button id="button8">8</button>
+    <button id="button9">9</button>
+    <button id="buttonDivide">/</button>
+    <br>
+    <button id="button4">4</button>
+    <button id="button5">5</button>
+    <button id="button6">6</button>
+    <button id="buttonMultiply">X</button>
+    <br>
+    <button id="button1">1</button>
+    <button id="button2">2</button>
+    <button id="button3">3</button>
+    <button id="buttonSubtract">-</button>
+    <br>
+    <button id="buttonClear">C</button>
+    <button id="button0">0</button>
+    <button id="buttonEquals">=</button>
+    <button id="buttonAdd">+</button>
+</body>
+<script>
+    function appendOperator(op) {
+    const lastChar = display.value.slice(-1);
+    if (!"+-*/".includes(lastChar)) {
+        display.value += op;
+    }
+    }
+    const display = document.querySelector("#display");
+    document.querySelector("#button1").onclick = () => {
+        display.value += "1";
+    };
+    document.querySelector("#button2").onclick = () => {
+        display.value += "2";
+    };
+    document.querySelector("#button3").onclick = () => {
+        display.value += "3";
+    };
+    document.querySelector("#button4").onclick = () => {
+        display.value += "4";
+    };
+    document.querySelector("#button5").onclick = () => {
+        display.value += "5";
+    };
+    document.querySelector("#button6").onclick = () => {
+        display.value += "6";
+    };
+    document.querySelector("#button7").onclick = () => {
+        display.value += "7";
+    };
+    document.querySelector("#button8").onclick = () => {
+        display.value += "8";
+    };
+    document.querySelector("#button9").onclick = () => {
+        display.value += "9";
+    };
+    document.querySelector("#button0").onclick = () => {
+        display.value += "0";
+    };
+    // Operators
+    document.querySelector("#buttonAdd").onclick = () => appendOperator("+");
+    document.querySelector("#buttonSubtract").onclick = () => appendOperator("-");
+    document.querySelector("#buttonMultiply").onclick = () => appendOperator("*");
+    document.querySelector("#buttonDivide").onclick = () => appendOperator("/");
+    document.querySelector("#buttonClear").onclick = () => {
+        display.value = "";
+    };
+    document.querySelector("#buttonEquals").onclick = () => {
+        try {
+            display.value = eval(display.value);
+        } catch {
+            display.value = "Error";
+        }
+    };
+    document.addEventListener("keydown", (e) => {
+    if ("0123456789".includes(e.key)) display.value += e.key;
+    if ("+-*/".includes(e.key)) appendOperator(e.key);
+    if (e.key === "Enter") display.value = eval(display.value);
+    if (e.key === "Backspace") display.value = display.value.slice(0, -1);
+    if (e.key === "Escape") display.value = "";
+    });
+</script>
+</html>
